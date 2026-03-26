@@ -15,7 +15,7 @@ const Banner = () => {
       <div className="banner-left-overlay d-flex align-items-center">
         <Container>
           <h1 className="banner-heading">
-            lalaa Unleash your inner musician with{" "}
+            Unleash your inner musician with{" "}
             <span className="brand-name">HarmoniQ</span>
           </h1>
           <p className="banner-description">
