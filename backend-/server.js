@@ -19,7 +19,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://frontend-khaki-zeta-75.vercel.app"
+  "https://frontend-khaki-zeta-75.vercel.app",
+  "https://steelblue-goat-719113.hostingersite.com"
 ];
 
 const corsOptions = {
@@ -103,6 +104,7 @@ app.use((err, req, res, next) => {
 ================================ */
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+// 0.0.0.0 required for Hostinger and most cloud platforms
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🔥 Server running on port ${PORT}`);
 });

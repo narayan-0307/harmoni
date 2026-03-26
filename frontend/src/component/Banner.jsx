@@ -15,7 +15,8 @@ const Banner = () => {
       <div className="banner-left-overlay d-flex align-items-center">
         <Container>
           <h1 className="banner-heading">
-           lala Unleash your inner musician with <span className="brand-name">HarmoniQ</span>
+            lalaa Unleash your inner musician with{" "}
+            <span className="brand-name">HarmoniQ</span>
           </h1>
           <p className="banner-description">
             The first step of learning to play an instrument? Wanting to play.
@@ -28,7 +29,6 @@ const Banner = () => {
             href="/login"
           >
             Let’s get started →
-            
           </Button>
         </Container>
       </div>
