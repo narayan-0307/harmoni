@@ -5,6 +5,7 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fs = require("fs");
 
 /* 🔹 ROUTE IMPORTS */
 const beatRoutes = require(path.join(__dirname, "routes", "beatroutes"));
@@ -75,6 +76,14 @@ const connectDB = async () => {
 connectDB();
 
 /* ===============================
+   SERVE REACT FRONTEND (production)
+================================ */
+const publicDir = path.join(__dirname, "public");
+if (fs.existsSync(publicDir)) {
+  app.use(express.static(publicDir));
+}
+
+/* ===============================
    API ROUTES
 ================================ */
 app.use("/api/beats", beatRoutes);
@@ -85,10 +94,25 @@ app.use("/api/piano", pianoRoutes);
 app.use("/api/admin", adminRoutes);
 
 /* ===============================
-   DEFAULT ROUTE
+   DEFAULT ROUTE — serve React for all non-API routes
 ================================ */
 app.get("/", (req, res) => {
-  res.send("🚀 API is running...");
+  const indexFile = path.join(__dirname, "public", "index.html");
+  if (fs.existsSync(indexFile)) {
+    res.sendFile(indexFile);
+  } else {
+    res.send("🚀 API is running...");
+  }
+});
+
+// Catch-all: serve React app for any non-API route (client-side routing)
+app.get(/^(?!\/api).*/, (req, res) => {
+  const indexFile = path.join(__dirname, "public", "index.html");
+  if (fs.existsSync(indexFile)) {
+    res.sendFile(indexFile);
+  } else {
+    res.status(404).json({ message: "Not found" });
+  }
 });
 
 /* ===============================
